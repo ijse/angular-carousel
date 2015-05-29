@@ -244,6 +244,7 @@
                             angular.forEach(getSlidesDOM(), function(child, index) {
                                 child.style.cssText = createStyleString(computeCarouselSlideStyle(index, x, options.transitionType));
                             });
+                            scope.$emit('rn-carousel-slides-position-update', offset, carouselId);
                         }
 
                         scope.nextSlide = function(slideOptions) {
@@ -393,7 +394,7 @@
                                 }, duration * 1000);
                             };
                         }
-                        
+
                         if (iAttributes.rnCarouselDefaultIndex) {
                             var defaultIndexModel = $parse(iAttributes.rnCarouselDefaultIndex);
                             options.defaultIndex = defaultIndexModel(scope.$parent) || 0;
@@ -428,7 +429,7 @@
                                     }
                                 });
                                 isIndexBound = true;
-                                
+
                                 if (options.defaultIndex) {
                                     goToSlide(options.defaultIndex, {
                                         animate: !init
